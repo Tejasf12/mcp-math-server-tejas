@@ -99,8 +99,8 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(500).json({ error: 'Internal server error' });
 });
 
-app.listen(port, () => {
-  console.log(`MCP Math Server running on http://localhost:${port}`);
+app.listen(port, '0.0.0.0', () => {
+  console.log(`MCP Math Server running on port ${port}`);
   console.log('Available endpoints:');
   console.log('  GET  /health - Health check');
   console.log('  GET  /mcp/tools - List available tools');
