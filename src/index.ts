@@ -6,7 +6,7 @@ import { addNumbersTool, handleAddNumbers } from './tools/math.js';
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = Number(process.env.PORT) || 3000;
 const apiKey = process.env.MCP_API_KEY;
 
 if (!apiKey) {
