@@ -9,11 +9,6 @@ const app = express();
 const port = Number(process.env.PORT) || 3000;
 const apiKey = process.env.MCP_API_KEY;
 
-if (!apiKey) {
-  console.error('Error: MCP_API_KEY environment variable is required');
-  process.exit(1);
-}
-
 app.use(cors());
 app.use(express.json());
 
@@ -42,7 +37,7 @@ app.get('/health', (req: Request, res: Response) => {
   res.json({ status: 'healthy', timestamp: new Date().toISOString() });
 });
 
-app.get('/mcp/tools', authenticateApiKey, async (req: AuthenticatedRequest, res: Response) => {
+app.get('/mcp/tools', async (req: Request, res: Response) => {
   try {
     res.json({
       tools: [addNumbersTool]
@@ -53,7 +48,7 @@ app.get('/mcp/tools', authenticateApiKey, async (req: AuthenticatedRequest, res:
   }
 });
 
-app.post('/mcp/tools/call', authenticateApiKey, async (req: AuthenticatedRequest, res: Response) => {
+app.post('/mcp/tools/call', async (req: Request, res: Response) => {
   try {
     const { name, arguments: args } = req.body;
     
